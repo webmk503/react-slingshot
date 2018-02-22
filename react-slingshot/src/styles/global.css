@@ -1,0 +1,45 @@
+body{
+    background-color: #ffd774;
+}
+input{
+    width: 200px !important;
+}
+
+TextArea{
+    width: 700px !important;
+}
+label {
+  width: 200px !important;
+}
+.post{
+  display: inline-block;
+  margin: 10px;
+}
+
+/*.menu-create{*/
+  /*display: inline-block;*/
+  /*border:2px solid #FF0D0D;*/
+  /*color: #FF0000;*/
+  /*border-radius: 48px 3px 3px 50px;*/
+  /*-webkit-border-radius: 48px 3px 3px 50px;*/
+  /*-moz-border-radius: 48px 3px 3px 50px;*/
+  /*font-family: Verdana;*/
+  /*width: auto;*/
+  /*height: auto;*/
+  /*font-size: 18px;*/
+  /*padding: 12px 40px;*/
+  /*box-shadow: inset 1px 0px 0px 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;*/
+  /*-moz-box-shadow: inset 1px 0px 0px 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;*/
+  /*-webkit-box-shadow: inset 1px 0px 0px 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;*/
+  /*text-shadow: 0 1px 0 #FFFFFF;*/
+  /*background-color: #FFFFFF;*/
+/*}*/
+/*.menu-create:hover, .btn-class:active{*/
+  /*border:2px solid #967D09;*/
+  /*color: #705D07;*/
+  /*box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;*/
+  /*-moz-box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;*/
+  /*-webkit-box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;*/
+  /*background-color: #FCDF5B;*/
+/*}*/
+
