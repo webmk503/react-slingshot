@@ -29,7 +29,6 @@ class PostContainer extends Component {
     const {actions: {createComment}, comments, posts} = this.props;
     const id = this.props.match.params.id;
     const post = posts[id];
-    console.log(post);
     if (!post) {
       return <div>This page doesn`t exist</div>
     }

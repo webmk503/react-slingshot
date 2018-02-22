@@ -25,7 +25,6 @@ class App extends Component {
 
   render() {
     const {posts} = this.props;
-    console.log('from shortpost',posts);
     return (
       <div className="app">
         <MainMenu/>
