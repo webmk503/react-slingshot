@@ -29,12 +29,22 @@ class Comment extends Component {
   };
 
   handleCreatingCommentAndAuthor = () => {
-    this.props.createComment(
-      this.state.commentsAuthor,
-      this.state.comment,
-      new Date().toLocaleString('ru', this.options),
-      this.props.post.id
-    );
+    console.log(this.props);
+    if (this.state.commentsAuthor.length > 0) {
+      this.props.createComment(
+        this.state.commentsAuthor,
+        this.state.comment,
+        new Date().toLocaleString('ru', this.options),
+        this.props.post.id
+      );
+    } else {
+      this.props.createComment(
+        this.props.post.author,
+        this.state.comment,
+        new Date().toLocaleString('ru', this.options),
+        this.props.post.id
+      );
+    }
     this.setState({
       commentsAuthor: '',
       comment: ''

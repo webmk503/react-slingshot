@@ -18,7 +18,6 @@ const mapStateToProps = state => {
         return filteredPosts.push(post);
       }
     });
-    console.log('1', filteredPosts)
     return {
       filteredPosts: filteredPosts,
       comments: state.commentReducer.comments,
@@ -44,8 +43,6 @@ class App extends Component {
 
   render() {
     const {actions: {changeSearchValue}, filteredPosts, searchValue} = this.props;
-    console.log('filteredPosts-render', filteredPosts)
-
     return (
       <div className="app">
         <MainMenu/>
@@ -59,7 +56,6 @@ class App extends Component {
             ref={(input) => this.input = input}
             onChange={() => changeSearchValue(this.input.value)}
           />
-
         </form>
         <div>
           {filteredPosts.map((post) => (

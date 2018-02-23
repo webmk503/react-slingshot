@@ -1,4 +1,4 @@
-import {ADD_POST, CREATE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE} from "../constants/main";
+import {ADD_POST, SAVE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE} from "../constants/main";
 
 export const createPost = (title, date, author, description) => {
   return {
@@ -34,12 +34,13 @@ export const createComment = (authorName, comment, date, postId) => {
   }
 };
 
-export const createAuthor = (author,) => {
+export const saveAuthor = (id, author,commentId) => {
   return {
-    type: CREATE_AUTHOR,
+    type: SAVE_AUTHOR,
     payload: {
-      id: `${Math.random()}`,
+      id,
       author,
+      commentId
     }
 
   }
