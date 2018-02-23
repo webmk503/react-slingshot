@@ -2,10 +2,12 @@
  import { combineReducers } from 'redux';
 import commentReducer from './commentReducer';
 import postReducer from './postsReducer';
+import authorReducer from './authorReducer';
 
 const reducers = combineReducers({
   postReducer,
-  commentReducer
+  commentReducer,
+  authorReducer
 });
 
  export default reducers;

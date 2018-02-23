@@ -10,13 +10,14 @@ class MainMenu extends Component {
     return (
       <Segment inverted>
         <Menu inverted secondary>
-          <Link to="/create">
-            <span className="menu">Create</span>
-          </Link>
-          <Link to="/">
-            <span className="menu active">Posts</span>
-          </Link>
-
+          <div>
+            <Link to="/create">
+              <span className="menu">Create</span>
+            </Link>
+            <Link to="/">
+              <span className="menu-btn">Posts</span>
+            </Link>
+          </div>
         </Menu>
       </Segment>
     )

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 import CreatePost from '../components/CreatePost';
-import {createPost, createComment} from "../actions/index";
+import {createPost, createComment, createAuthor} from "../actions/index";
 import '../styles/global.css';
 import MainMenu from "../components/MainMenu";
 
@@ -18,21 +18,25 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     createPost,
-    createComment
+    createComment,
+    createAuthor,
   }, dispatch)
 });
 
 class CreatedPost extends Component {
 
   render() {
-    const {actions: {createPost,}, posts} = this.props;
+    const {actions: {createPost,}, posts, comments} = this.props;
     return (
       <div className="posts">
         <MainMenu/>
           <CreatePost
             key={posts.id}
+            objPosts={posts}
+            comments={comments}
             createArticle={createPost}
-            objPosts={posts}/>
+            createAuthor={createAuthor}
+          />
         </div>
     );
   }

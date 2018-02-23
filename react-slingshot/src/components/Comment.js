@@ -12,12 +12,6 @@ class Comment extends Component {
     comment: '',
   };
 
-  handleEditText = (field) => (e) => {
-    this.setState({
-      [field]: e.target.value,
-    });
-  };
-
   options = {
     year: 'numeric',
     month: 'long',
@@ -28,7 +22,13 @@ class Comment extends Component {
     second: 'numeric'
   };
 
-  handleCreatingComment = () => {
+  handleEditText = (field) => (e) => {
+    this.setState({
+      [field]: e.target.value,
+    });
+  };
+
+  handleCreatingCommentAndAuthor = () => {
     this.props.createComment(
       this.state.commentsAuthor,
       this.state.comment,
@@ -44,11 +44,12 @@ class Comment extends Component {
   render() {
     return (
       <div>
-        <input type='text'
-               placeholder='Name'
-               value={this.state.commentsAuthor}
-               onChange={this.handleEditText('commentsAuthor')}
-               ref={(input) => this.commentInput = input}
+        <input
+          type='text'
+          placeholder='Name'
+          value={this.state.commentsAuthor}
+          onChange={this.handleEditText('commentsAuthor')}
+          ref={(input) => this.commentInput = input}
         />
         <Form.TextArea
           autoHeight
@@ -58,7 +59,7 @@ class Comment extends Component {
         />
         <Button
           content='Add Reply'
-          onClick={this.handleCreatingComment}
+          onClick={this.handleCreatingCommentAndAuthor}
           labelPosition='left'
           icon='edit'
           primary

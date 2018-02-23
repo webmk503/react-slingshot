@@ -10,19 +10,20 @@ class ShortPost extends Component {
   render() {
     const {objPost} = this.props;
     return (
-      <div  className="post">
-        <Card
-          image='../images/elliot.jpg'
-          header={objPost.title}
-          meta={objPost.author}
-          description={objPost.description}
-          extra={
-            <Link to={`post/${objPost.id}`}>
-              <Icon name='comment'/>
-              Подробнее
-            </Link>
-          }
-        />
+
+        <div className="post">
+          <Card
+            image='../images/elliot.jpg'
+            header={objPost.title}
+            meta={objPost.author}
+            description={objPost.description}
+            extra={
+              <Link to={`post/${objPost.id}`}>
+                <Icon name='comment'/>
+                Подробнее
+              </Link>
+            }
+          />
       </div>
     );
   }

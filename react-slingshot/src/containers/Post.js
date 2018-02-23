@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 import Post from '../components/Post';
 import '../styles/global.css';
-import {createPost, createComment} from "../actions/index";
+import {createPost, createComment, createAuthor} from "../actions/index";
 import MainMenu from "../components/MainMenu";
 
 const mapStateToProps = state => {
@@ -18,15 +18,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    createPost,
-    createComment
+    createComment,
   }, dispatch)
 });
 
 class PostContainer extends Component {
 
   render() {
-    const {actions: {createComment}, comments, posts} = this.props;
+    const {actions: {createComment, createAuthor}, comments, posts} = this.props;
     const id = this.props.match.params.id;
     const post = posts[id];
     if (!post) {
