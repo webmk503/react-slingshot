@@ -21,11 +21,13 @@ const mapStateToProps = state => {
     return {
       filteredPosts: filteredPosts,
       comments: state.commentReducer.comments,
+      authors: state.authorReducer.authors
     };
   }
   return {
     filteredPosts: [...posts],
     comments: state.commentReducer.comments,
+    authors: state.authorReducer.authors
   }
 };
 
@@ -42,7 +44,7 @@ class App extends Component {
   input = '';
 
   render() {
-    const {actions: {changeSearchValue}, filteredPosts, searchValue} = this.props;
+    const {actions: {changeSearchValue}, filteredPosts, authors} = this.props;
     return (
       <div className="app">
         <MainMenu/>
@@ -61,6 +63,7 @@ class App extends Component {
           {filteredPosts.map((post) => (
             <ShortPost
               objPost={post}
+              authors={authors}
               key={`${post.id}`}
             />
           ))}

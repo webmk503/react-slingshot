@@ -11,21 +11,21 @@ class Post extends Component {
   input = '';
   state = {
     editingAuthor: false,
-    authorName: this.props.objPost.author,
-
+    authorName: this.props.authors[this.props.objPost.authorId].name,
   };
 
   handleSaveAuthor = () => {
-    const {saveAuthor, objPost, objComments} = this.props;
+    const {saveAuthor, objPost, objComments, authors} = this.props;
 
     if (this.state.editingAuthor) {
       this.setState({
-        authorName: objPost.author
+        authorName: authors[objPost.authorId].name
       });
-      Object.values(objComments).map((comment) => {
-        saveAuthor(objPost.id, this.state.authorName, comment.id);
-        console.log('commentId', comment)
-      })
+      const editAuthor = {
+        id: authors[objPost.authorId].id,
+        name: this.state.authorName
+      };
+      saveAuthor(editAuthor);
     }
     this.setState({
       editingAuthor: !this.state.editingAuthor,
@@ -39,7 +39,7 @@ class Post extends Component {
   };
 
   renderEditOrSave = () => {
-    const {objPost} = this.props;
+    const {objPost, authors} = this.props;
     if (this.state.editingAuthor) {
       return (
         <h6>
@@ -57,7 +57,7 @@ class Post extends Component {
     }
     return (
       <h6>
-        Author: {objPost.author}
+        Author: {authors[objPost.authorId].name}
         <button onClick={this.handleSaveAuthor}>
           Edit Author
         </button>
@@ -66,7 +66,9 @@ class Post extends Component {
   };
 
   render() {
-    const {addComment, objPost, objComments} = this.props;
+
+    const {addComment, objPost, objComments, authors, createAuthor} = this.props;
+
     return (
       <Form>
         <Container text>
@@ -81,10 +83,16 @@ class Post extends Component {
         {objPost.comments.map((commentId) => (
           <CommentsBlock
             comment={objComments[commentId]}
+            authors={authors}
             key={commentId}
           />
         ))}
-        <Comment createComment={addComment} post={objPost}/>
+        <Comment
+          createComment={addComment}
+          createAuthor={createAuthor}
+          authors={authors}
+          post={objPost}
+        />
       </Form>
     );
   }

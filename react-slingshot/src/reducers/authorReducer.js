@@ -1,7 +1,7 @@
-import {CREATE_AUTHOR} from "../constants/main";
+import {CREATE_AUTHOR, SAVE_AUTHOR} from "../constants/main";
 
 const initialState = {
-  author: {}
+  authors: {}
 };
 
 const authorReducer = (state = initialState, action) => {
@@ -9,14 +9,24 @@ const authorReducer = (state = initialState, action) => {
     case(CREATE_AUTHOR):
       return {
         ...state,
-        author: {
-          ...state.author,
+        authors: {
+          ...state.authors,
           [action.payload.id]: {
             ...action.payload,
           }
         },
       };
-
+    case(SAVE_AUTHOR):
+      return {
+        ...state,
+        authors: {
+          ...state.authors,
+          [action.payload.id]: {
+            ...state.authors[action.payload.id],
+            name: action.payload.name,
+          }
+        },
+      };
     default:
       return state;
   }

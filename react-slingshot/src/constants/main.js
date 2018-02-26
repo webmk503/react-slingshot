@@ -2,3 +2,4 @@ export const ADD_POST = 'ADD_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const SAVE_AUTHOR = 'SAVE_AUTHOR';
 export const CHANGE_SEARCH_VALUE = 'CHANGE_SEARCH_VALUE';
+export const CREATE_AUTHOR = 'CREATE_AUTHOR';

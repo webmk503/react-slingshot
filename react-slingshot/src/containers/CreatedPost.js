@@ -12,6 +12,7 @@ const mapStateToProps = state => {
   return {
     posts: state.postReducer.posts,
     comments: state.commentReducer.comments,
+    authors: state.authorReducer.authors,
   }
 };
 
@@ -26,13 +27,14 @@ const mapDispatchToProps = dispatch => ({
 class CreatedPost extends Component {
 
   render() {
-    const {actions: {createPost,}, posts, comments} = this.props;
+    const {actions: {createPost, createAuthor}, posts, authors,comments} = this.props;
     return (
       <div className="posts">
         <MainMenu/>
           <CreatePost
             key={posts.id}
             objPosts={posts}
+            authors={authors}
             comments={comments}
             createArticle={createPost}
             createAuthor={createAuthor}

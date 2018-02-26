@@ -12,20 +12,22 @@ const mapStateToProps = state => {
   return {
     posts: state.postReducer.posts,
     comments: state.commentReducer.comments,
+    authors: state.authorReducer.authors,
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     createComment,
-    saveAuthor
+    saveAuthor,
+    createAuthor
   }, dispatch)
 });
 
 class PostContainer extends Component {
 
   render() {
-    const {actions: {createComment, saveAuthor}, comments, posts} = this.props;
+    const {actions: {createComment, saveAuthor, createAuthor}, comments, posts, authors} = this.props;
     const id = this.props.match.params.id;
     const post = posts[id];
     if (!post) {
@@ -38,8 +40,10 @@ class PostContainer extends Component {
           <Post
             key={Math.random()}
             objPost={posts[id]}
+            authors={authors}
             objComments={comments}
             addComment={createComment}
+            createAuthor={createAuthor}
             saveAuthor={saveAuthor}
           />
         </div>

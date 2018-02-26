@@ -6,13 +6,13 @@ import '../styles/global.css';
 class CommentsBlock extends Component {
 
   render() {
-    const {comment} = this.props;
+    const {comment, authors} = this.props;
     return (
       <Comment.Group minimal>
         <Comment>
           <Comment.Avatar src='../images/matt.jpg'/>
           <Comment.Content>
-            <Comment.Author>{comment.authorName}</Comment.Author>
+            <Comment.Author>{authors[comment.authorId].name}</Comment.Author>
             <Comment.Metadata>
               <span>{comment.date}</span>
             </Comment.Metadata>

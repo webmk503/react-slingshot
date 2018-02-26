@@ -33,10 +33,17 @@ class CreatePost extends Component {
   };
 
   handleCreatingArticle = () => {
+    const newAuthor = {
+      id: Math.random(),
+      name: this.state.author,
+    };
+    this.props.createAuthor(
+      newAuthor
+    );
     this.props.createArticle(
       this.state.title,
       new Date().toLocaleString('ru', this.options),
-      this.state.author,
+      newAuthor.id,
       this.state.descr
     );
     this.setState({

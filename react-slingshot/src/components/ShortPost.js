@@ -8,14 +8,13 @@ import {Link} from "react-router-dom";
 class ShortPost extends Component {
 
   render() {
-    const {objPost} = this.props;
+    const {objPost, authors} = this.props;
     return (
-
         <div className="post">
           <Card
             image='../images/elliot.jpg'
             header={objPost.title}
-            meta={objPost.author}
+            meta={authors[objPost.authorId].name}
             description={objPost.description}
             extra={
               <Link to={`post/${objPost.id}`}>
