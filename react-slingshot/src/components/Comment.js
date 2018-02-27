@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../styles/global.css';
+import {updateComments} from "../utils/localStorage";
 
 class Comment extends Component {
 
@@ -30,29 +31,37 @@ class Comment extends Component {
 
   handleCreatingCommentAndAuthor = () => {
     const {authors, post} = this.props;
-    console.log(post);
-
     if (this.state.commentsAuthor.length > 0 && authors[post.authorId].name !== this.state.commentsAuthor) {
       const newAuthor = {
         id: Math.random(),
         name: this.state.commentsAuthor
       };
       this.props.createAuthor(
-       newAuthor
+        newAuthor
       );
+      const newComment = {
+        id: Math.random(),
+        authorId: newAuthor.id,
+        comment: this.state.comment,
+        date: new Date().toLocaleString('ru', this.options),
+        postId: post.id
+      };
       this.props.createComment(
-        newAuthor.id,
-        this.state.comment,
-        new Date().toLocaleString('ru', this.options),
-        post.id
+        newComment
       );
+      updateComments(newComment);
     } else {
+      const newComment = {
+        id: Math.random(),
+        authorId: authors[post.authorId].id,
+        comment: this.state.comment,
+        date: new Date().toLocaleString('ru', this.options),
+        postId: post.id
+      };
       this.props.createComment(
-        authors[post.authorId].id,
-        this.state.comment,
-        new Date().toLocaleString('ru', this.options),
-        post.id,
+        newComment,
       );
+      updateComments(newComment);
     }
     this.setState({
       commentsAuthor: '',

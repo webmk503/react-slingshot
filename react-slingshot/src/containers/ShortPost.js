@@ -5,7 +5,7 @@ import MainMenu from '../components/MainMenu';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 import ShortPost from "../components/ShortPost";
 import '../styles/global.css';
-import {createPost, createComment, changeSearchValue} from "../actions/index";
+import {createPost, createComment, changeSearchValue, getLocalStorage} from "../actions/index";
 
 
 const mapStateToProps = state => {

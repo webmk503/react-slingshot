@@ -1,4 +1,4 @@
-import {CREATE_AUTHOR, CREATE_COMMENT, SAVE_AUTHOR,} from "../constants/main";
+import { CREATE_COMMENT, GET_STORAGE, SAVE_AUTHOR,} from "../constants/main";
 
 const initialState = {
   comments: {},
@@ -25,6 +25,13 @@ const commentReducer = (state = initialState, action) => {
             ...state.comments[action.payload.commentId],
             authorId: action.payload.id,
           }
+        }
+      };
+    case(GET_STORAGE):
+      return{
+        ...state,
+        comments: {
+          ...action.payload.comments
         }
       };
     default:

@@ -1,16 +1,12 @@
-import {ADD_POST, SAVE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE, CREATE_AUTHOR} from "../constants/main";
+import {
+  ADD_POST, SAVE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE, CREATE_AUTHOR, GET_POSTS,
+  GET_STORAGE
+} from "../constants/main";
 
-export const createPost = (title, date, authorId, description) => {
+export const createPost = (newPost) => {
   return {
     type: ADD_POST,
-    payload: {
-      title,
-      date,
-      authorId,
-      description,
-      id: `${Math.random()}`,
-      comments: []
-    },
+    payload: newPost,
   }
 };
 
@@ -21,31 +17,35 @@ export const changeSearchValue = (value) => {
   }
 };
 
-export const createComment = (authorId, comment, date, postId) => {
+export const createComment = (newComment) => {
   return {
     type: CREATE_COMMENT,
-    payload: {
-      id: `${Math.random()}`,
-      authorId,
-      comment,
-      date,
-      postId
-    }
+    payload: newComment
   }
 };
 
-export const createAuthor = (obj) => {
+export const createAuthor = (newAuthor) => {
   return {
     type: CREATE_AUTHOR,
-    payload: obj
+    payload: newAuthor
   }
 };
 
-export const saveAuthor = (obj,) => {
+export const saveAuthor = (changedAuthor) => {
   return {
     type: SAVE_AUTHOR,
-    payload: obj
+    payload: changedAuthor
+  }
+};
 
+export const getLocalStorage = (gotPosts, gotAuthors, gotComments) => {
+  return {
+    type: GET_STORAGE,
+    payload: {
+      posts: gotPosts,
+      authors: gotAuthors,
+      comments: gotComments
+    },
   }
 };
 

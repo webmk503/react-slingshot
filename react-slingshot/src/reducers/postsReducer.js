@@ -1,9 +1,7 @@
-import {ADD_POST, CREATE_COMMENT, CHANGE_SEARCH_VALUE, SAVE_AUTHOR, CREATE_AUTHOR} from "../constants/main";
+import { ADD_POST, CREATE_COMMENT, CHANGE_SEARCH_VALUE, GET_STORAGE } from "../constants/main";
 
 const initialState = {
   posts: {},
-  comments: {},
-  authors: {},
   searchValue: ''
 };
 
@@ -40,7 +38,11 @@ const postReducer = (state = initialState, action) => {
         ...state,
         searchValue: action.payload
       };
-
+    case(GET_STORAGE):
+      return {
+        ...state,
+        posts: action.payload.posts
+      };
     default:
       return state;
   }

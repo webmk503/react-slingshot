@@ -5,6 +5,7 @@ import Comment from './Comment';
 import '../styles/global.css';
 import CommentsBlock from "./CommentsBlock";
 import '../styles/global.css';
+import {updateAuthor} from "../utils/localStorage";
 
 class Post extends Component {
 
@@ -16,7 +17,6 @@ class Post extends Component {
 
   handleSaveAuthor = () => {
     const {saveAuthor, objPost, objComments, authors} = this.props;
-
     if (this.state.editingAuthor) {
       this.setState({
         authorName: authors[objPost.authorId].name
@@ -26,6 +26,8 @@ class Post extends Component {
         name: this.state.authorName
       };
       saveAuthor(editAuthor);
+      updateAuthor(editAuthor);
+
     }
     this.setState({
       editingAuthor: !this.state.editingAuthor,
@@ -66,9 +68,7 @@ class Post extends Component {
   };
 
   render() {
-
     const {addComment, objPost, objComments, authors, createAuthor} = this.props;
-
     return (
       <Form>
         <Container text>
@@ -79,7 +79,6 @@ class Post extends Component {
           <br/>
         </Container>
         <Header as='h3' dividing>Comments</Header>
-
         {objPost.comments.map((commentId) => (
           <CommentsBlock
             comment={objComments[commentId]}

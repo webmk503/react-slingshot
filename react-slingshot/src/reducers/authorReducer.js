@@ -1,4 +1,4 @@
-import {CREATE_AUTHOR, SAVE_AUTHOR} from "../constants/main";
+import {CREATE_AUTHOR, GET_STORAGE, SAVE_AUTHOR} from "../constants/main";
 
 const initialState = {
   authors: {}
@@ -26,6 +26,13 @@ const authorReducer = (state = initialState, action) => {
             name: action.payload.name,
           }
         },
+      };
+    case(GET_STORAGE):
+      return{
+        ...state,
+        authors: {
+          ...action.payload.authors
+        }
       };
     default:
       return state;

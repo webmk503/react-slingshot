@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import '../styles/global.css';
+import {updateAuthor, updatePosts} from "../utils/localStorage";
 
 class CreatePost extends Component {
 
@@ -37,15 +38,22 @@ class CreatePost extends Component {
       id: Math.random(),
       name: this.state.author,
     };
+    const newPost = {
+      id: Math.random(),
+      title: this.state.title,
+      date: new Date().toLocaleString('ru', this.options),
+      authorId: newAuthor.id,
+      description: this.state.descr,
+      comments: [],
+    };
     this.props.createAuthor(
       newAuthor
     );
     this.props.createArticle(
-      this.state.title,
-      new Date().toLocaleString('ru', this.options),
-      newAuthor.id,
-      this.state.descr
+      newPost
     );
+    updateAuthor(newAuthor);
+    updatePosts(newPost);
     this.setState({
       title: '',
       author: '',
