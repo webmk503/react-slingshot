@@ -5,30 +5,30 @@ import MainMenu from '../components/MainMenu';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 import ShortPost from "../components/ShortPost";
 import '../styles/global.css';
-import {createPost, createComment, changeSearchValue, getLocalStorage} from "../actions/index";
+import {createPost, createComment, changeSearchValue} from "../actions/index";
 
 
 const mapStateToProps = state => {
   let searchValue = state.postReducer.searchValue;
   const posts = Object.values(state.postReducer.posts);
   let filteredPosts = [];
-  if (searchValue.length > 0) {
-    filteredPosts = posts.filter((post) => {
-      if (post.title.includes(searchValue) || post.description.includes(searchValue)) {
-        return filteredPosts.push(post);
-      }
-    });
-    return {
-      filteredPosts: filteredPosts,
-      comments: state.commentReducer.comments,
-      authors: state.authorReducer.authors
-    };
-  }
-  return {
+  let stateObject = {
     filteredPosts: [...posts],
     comments: state.commentReducer.comments,
     authors: state.authorReducer.authors
+  };
+  if (searchValue.length > 0) {
+    filteredPosts = posts.filter((post) => {
+      if (post.title.includes(searchValue) || post.description.includes(searchValue)) {
+        return filteredPosts;
+      }
+    });
+    return stateObject = {
+      ...stateObject,
+      filteredPosts: filteredPosts,
+    };
   }
+  return stateObject;
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -56,7 +56,7 @@ class App extends Component {
             placeholder="Search..."
             autoComplete="off"
             ref={(input) => this.input = input}
-            onChange={() => changeSearchValue(this.input.value)}
+            onChange={(e) => changeSearchValue(e.target.value)}
           />
         </form>
         <div>

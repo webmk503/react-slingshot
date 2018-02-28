@@ -9,7 +9,7 @@ import CreatedPost from "./containers/CreatedPost";
 import ShortPost from "./containers/ShortPost";
 import PostContainer from "./containers/Post";
 import NotFoundPage from "./components/PageNotFound";
-import {getAuthors, getComments, getPosts} from "./utils/localStorage";
+import {createLocalStorage, getAuthors, getComments, getPosts} from "./utils/localStorage";
 import {getLocalStorage} from "./actions/index";
 
 const mapStateToProps = state => {
@@ -26,6 +26,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     getLocalStorage,
+    createLocalStorage,
   }, dispatch)
 });
 
@@ -33,8 +34,10 @@ class Root extends Component {
 
   componentWillMount() {
     const { posts, comments, authors } = this.props;
-   this.props.actions.getLocalStorage(posts, authors, comments);
-
+    if(posts === null){
+      this.props.actions.createLocalStorage();
+    }
+    this.props.actions.getLocalStorage(posts, authors, comments);
   }
 
   render() {

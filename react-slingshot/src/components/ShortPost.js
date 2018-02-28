@@ -9,6 +9,7 @@ class ShortPost extends Component {
 
   render() {
     const {objPost, authors} = this.props;
+    console.log('this.props',this.props);
     return (
         <div className="post">
           <Card

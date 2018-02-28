@@ -39,7 +39,7 @@ class PostContainer extends Component {
         <div>
           <Post
             key={Math.random()}
-            objPost={posts[id]}
+            objPost={post}
             authors={authors}
             objComments={comments}
             addComment={createComment}

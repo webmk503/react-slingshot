@@ -34,9 +34,9 @@ class Post extends Component {
     });
   };
 
-  handleEditName = () => {
+  handleEditName = (e) => {
     this.setState({
-      authorName: this.input.value
+      authorName: e.target.value
     });
   };
 

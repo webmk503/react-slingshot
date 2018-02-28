@@ -1,3 +1,9 @@
+export function createLocalStorage() {
+  localStorage.setItem('posts',JSON.stringify({}));
+  localStorage.setItem('comments', JSON.stringify({}));
+  localStorage.setItem('authors', JSON.stringify({}));
+
+}
 export function updatePosts(post) {
   const oldPosts = JSON.parse(localStorage.getItem('posts'));
   const newPosts = {
@@ -31,7 +37,6 @@ export function updateComments(comment) {
   };
   localStorage.setItem('posts', JSON.stringify(commentIntoPost));
 }
-
 export function updateAuthor(author) {
   const oldAuthors = JSON.parse(localStorage.getItem('authors'));
   const newAuthors = {

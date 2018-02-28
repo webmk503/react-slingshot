@@ -11,12 +11,6 @@ class CreatePost extends Component {
   titleInput = '';
   authorInput = '';
 
-  state = {
-    title: '',
-    author: '',
-    descr: ''
-  };
-
   options = {
     year: 'numeric',
     month: 'long',
@@ -27,6 +21,12 @@ class CreatePost extends Component {
     second: 'numeric'
   };
 
+  state = {
+    title: '',
+    author: '',
+    descr: ''
+  };
+
   handleEditText = (field) => (e) => {
     this.setState({
       [field]: e.target.value,
@@ -34,32 +34,62 @@ class CreatePost extends Component {
   };
 
   handleCreatingArticle = () => {
-    const newAuthor = {
-      id: Math.random(),
-      name: this.state.author,
-    };
-    const newPost = {
-      id: Math.random(),
-      title: this.state.title,
-      date: new Date().toLocaleString('ru', this.options),
-      authorId: newAuthor.id,
-      description: this.state.descr,
-      comments: [],
-    };
-    this.props.createAuthor(
-      newAuthor
-    );
-    this.props.createArticle(
-      newPost
-    );
-    updateAuthor(newAuthor);
-    updatePosts(newPost);
-    this.setState({
-      title: '',
-      author: '',
-      descr: ''
+    const {authors} = this.props;
+    const author = Object.values(authors);
+    const ifEqual = author.find((elem) => {
+      return elem.name === this.state.author;
     });
+    console.log(ifEqual);
+    if (ifEqual) {
+      const newPost = {
+        id: Math.random(),
+        title: this.state.title,
+        date: new Date().toLocaleString('ru', this.options),
+        authorId: ifEqual.id,
+        description: this.state.descr,
+        comments: []
+      };
+      this.props.createArticle(
+        newPost
+      );
+      this.setState({
+        title: '',
+        author: '',
+        descr: ''
+      });
+      updatePosts(newPost);
+    } else {
+
+      const newAuthor = {
+        id: Math.random(),
+        name: this.state.author,
+      };
+      const newPost = {
+        id: Math.random(),
+        title: this.state.title,
+        date: new Date().toLocaleString('ru', this.options),
+        authorId: newAuthor.id,
+        description: this.state.descr,
+        comments: []
+      };
+      this.props.createAuthor(
+        newAuthor
+      );
+      this.props.createArticle(
+        newPost
+      );
+      this.setState({
+        title: '',
+        author: '',
+        descr: ''
+      });
+      updateAuthor(newAuthor);
+      updatePosts(newPost);
+    }
+
+
   };
+
 
   render() {
     return (
