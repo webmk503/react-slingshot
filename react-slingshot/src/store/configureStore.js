@@ -6,11 +6,16 @@ import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 import logger from 'redux-logger'
 import rootReducer from '../reducers';
+import addDate from '../middlewares/addDate';
+import updater from '../middlewares/updateLocalStorage'
 
 export const history = createHistory();
 
 function configureStoreProd(initialState) {
   const reactRouterMiddleware = routerMiddleware(history);
+  const createDate = (store) => (next) => (action) => {
+    console.info('Action is: ',action.type);
+  };
   const middlewares = [
     // Add other middleware on this line...
 
@@ -18,16 +23,20 @@ function configureStoreProd(initialState) {
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
     thunk,
     reactRouterMiddleware,
+    createDate
   ];
 
   return createStore(rootReducer, initialState, compose(
-    applyMiddleware(...middlewares, logger)
+    applyMiddleware(...middlewares, logger, addDate, updater,)
     )
   );
 }
 
 function configureStoreDev(initialState) {
   const reactRouterMiddleware = routerMiddleware(history);
+
+
+
   const middlewares = [
     reduxImmutableStateInvariant(),
     thunk,
@@ -36,7 +45,7 @@ function configureStoreDev(initialState) {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
   const store = createStore(rootReducer, initialState, composeEnhancers(
-    applyMiddleware(...middlewares,logger)
+    applyMiddleware(...middlewares, logger, addDate, updater,)
     )
   );
 

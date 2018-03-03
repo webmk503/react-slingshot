@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../styles/global.css';
-import {updateComments} from "../utils/localStorage";
+import {updateAuthor, updateComments} from "../utils/localStorage";
+import DateOptions from '../HOC/DateOptions';
 
 class Comment extends Component {
 
@@ -13,55 +14,42 @@ class Comment extends Component {
     comment: '',
   };
 
-  options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'long',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-  };
-
   handleEditText = (field) => (e) => {
     this.setState({
       [field]: e.target.value,
     });
   };
 
-  handleCreatingCommentAndAuthor = () => {
-    const {authors, post} = this.props;
-    if (this.state.commentsAuthor.length > 0 && authors[post.authorId].name !== this.state.commentsAuthor) {
+    handleCreatingCommentAndAuthor = () => {
+      const {post, authors, options} = this.props;
+      if (this.state.commentsAuthor.length > 0
+        && authors[post.authorId].name !== this.state.commentsAuthor) {
       const newAuthor = {
         id: Math.random(),
-        name: this.state.commentsAuthor
+        name: this.state.commentsAuthor,
+        date: '',
       };
-      this.props.createAuthor(
-        newAuthor
-      );
+      this.props.createAuthor(newAuthor);
       const newComment = {
         id: Math.random(),
         authorId: newAuthor.id,
         comment: this.state.comment,
-        date: new Date().toLocaleString('ru', this.options),
+        date: '',
         postId: post.id
       };
-      this.props.createComment(
-        newComment
-      );
-      updateComments(newComment);
-    } else {
+      this.props.createComment(newComment);
+      //updateComments(newComment);
+      //updateAuthor(newAuthor);
+      } else {
       const newComment = {
         id: Math.random(),
         authorId: authors[post.authorId].id,
         comment: this.state.comment,
-        date: new Date().toLocaleString('ru', this.options),
+        date: new Date().toLocaleString('ru', options),
         postId: post.id
       };
-      this.props.createComment(
-        newComment,
-      );
-      updateComments(newComment);
+      this.props.createComment(newComment);
+      //updateComments(newComment);
     }
     this.setState({
       commentsAuthor: '',
@@ -101,4 +89,4 @@ Comment.propTypes = {
   createComment: PropTypes.func,
 };
 
-export default Comment;
+export default DateOptions(Comment);

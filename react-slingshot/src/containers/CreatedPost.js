@@ -18,28 +18,29 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    createPost,
-    createComment,
-    createAuthor,
-  }, dispatch)
+      createPost,
+      createComment,
+      createAuthor,
+    },
+    dispatch)
 });
 
 class CreatedPost extends Component {
 
   render() {
-    const {actions: {createPost, createAuthor}, posts, authors,comments} = this.props;
+    const {actions: {createPost, createAuthor}, posts, authors, comments} = this.props;
     return (
       <div className="posts">
         <MainMenu/>
-          <CreatePost
-            key={posts.id}
-            objPosts={posts}
-            authors={authors}
-            comments={comments}
-            createArticle={createPost}
-            createAuthor={createAuthor}
-          />
-        </div>
+        <CreatePost
+          key={posts.id}
+          objPosts={posts}
+          authors={authors}
+          comments={comments}
+          createArticle={createPost}
+          createAuthor={createAuthor}
+        />
+      </div>
     );
   }
 }
@@ -51,5 +52,3 @@ CreatedPost.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatedPost);
-
-

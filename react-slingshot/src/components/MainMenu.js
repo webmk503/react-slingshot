@@ -25,5 +25,3 @@ class MainMenu extends Component {
 }
 
 export default MainMenu;
-
-

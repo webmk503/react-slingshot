@@ -1,9 +1,10 @@
 export function createLocalStorage() {
-  localStorage.setItem('posts',JSON.stringify({}));
+  localStorage.setItem('posts', JSON.stringify({}));
   localStorage.setItem('comments', JSON.stringify({}));
   localStorage.setItem('authors', JSON.stringify({}));
 
 }
+
 export function updatePosts(post) {
   const oldPosts = JSON.parse(localStorage.getItem('posts'));
   const newPosts = {
@@ -15,14 +16,25 @@ export function updatePosts(post) {
   localStorage.setItem('posts', JSON.stringify(newPosts));
 }
 
+export function updateAuthor(author) {
+  const oldAuthors = JSON.parse(localStorage.getItem('authors'));
+  const newAuthors = {
+    ...oldAuthors,
+    [author.id]: {
+      ...author
+    }
+  };
+  localStorage.setItem('authors', JSON.stringify(newAuthors));
+}
+
 export function updateComments(comment) {
   const oldComments = JSON.parse(localStorage.getItem('comments'));
   const posts = JSON.parse(localStorage.getItem('posts'));
   const newComments = {
     ...oldComments,
-      [comment.id]: {
-        ...comment
-      }
+    [comment.id]: {
+      ...comment
+    }
   };
   localStorage.setItem('comments', JSON.stringify(newComments));
   const commentIntoPost = {
@@ -37,16 +49,7 @@ export function updateComments(comment) {
   };
   localStorage.setItem('posts', JSON.stringify(commentIntoPost));
 }
-export function updateAuthor(author) {
-  const oldAuthors = JSON.parse(localStorage.getItem('authors'));
-  const newAuthors = {
-    ...oldAuthors,
-    [author.id]: {
-      ...author
-    }
-  };
-  localStorage.setItem('authors', JSON.stringify(newAuthors));
-}
+
 
 export function getPosts() {
   return JSON.parse(localStorage.getItem('posts'));

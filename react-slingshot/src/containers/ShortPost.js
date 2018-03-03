@@ -7,26 +7,21 @@ import ShortPost from "../components/ShortPost";
 import '../styles/global.css';
 import {createPost, createComment, changeSearchValue} from "../actions/index";
 
-
 const mapStateToProps = state => {
   let searchValue = state.postReducer.searchValue;
   const posts = Object.values(state.postReducer.posts);
   let filteredPosts = [];
   let stateObject = {
-    filteredPosts: [...posts],
+    posts: [...posts],
     comments: state.commentReducer.comments,
     authors: state.authorReducer.authors
   };
+
   if (searchValue.length > 0) {
     filteredPosts = posts.filter((post) => {
-      if (post.title.includes(searchValue) || post.description.includes(searchValue)) {
-        return filteredPosts;
-      }
+      return (post.title.includes(searchValue) || post.description.includes(searchValue));
     });
-    return stateObject = {
-      ...stateObject,
-      filteredPosts: filteredPosts,
-    };
+    stateObject.posts = filteredPosts;
   }
   return stateObject;
 };
@@ -41,26 +36,21 @@ const mapDispatchToProps = dispatch => ({
 
 class App extends Component {
 
-  input = '';
-
   render() {
-    const {actions: {changeSearchValue}, filteredPosts, authors} = this.props;
+    const {actions: {changeSearchValue}, posts, authors} = this.props;
     return (
       <div className="app">
         <MainMenu/>
         <form role="search" className="search-form">
           <input
-            type="search"
-            name="q"
             className="search-text"
             placeholder="Search..."
             autoComplete="off"
-            ref={(input) => this.input = input}
             onChange={(e) => changeSearchValue(e.target.value)}
           />
         </form>
         <div>
-          {filteredPosts.map((post) => (
+          {posts.map((post) => (
             <ShortPost
               objPost={post}
               authors={authors}

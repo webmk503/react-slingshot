@@ -1,7 +1,4 @@
-import {
-  ADD_POST, SAVE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE, CREATE_AUTHOR, GET_POSTS,
-  GET_STORAGE
-} from "../constants/main";
+import { ADD_POST, SAVE_AUTHOR, CREATE_COMMENT, CHANGE_SEARCH_VALUE, CREATE_AUTHOR, GET_STORAGE} from "../constants/main";
 
 export const createPost = (newPost) => {
   return {

@@ -27,15 +27,20 @@ const mapDispatchToProps = dispatch => ({
 class PostContainer extends Component {
 
   render() {
-    const {actions: {createComment, saveAuthor, createAuthor}, comments, posts, authors} = this.props;
+    const {
+      actions: {createComment, saveAuthor, createAuthor},
+      comments, posts, authors,
+    } = this.props;
     const id = this.props.match.params.id;
     const post = posts[id];
+
     if (!post) {
       return <div>This page doesn`t exist</div>
     }
+
     return (
       <div>
-        <MainMenu/>
+        <MainMenu />
         <div>
           <Post
             key={Math.random()}

@@ -9,25 +9,25 @@ import {updateAuthor} from "../utils/localStorage";
 
 class Post extends Component {
 
-  input = '';
   state = {
     editingAuthor: false,
     authorName: this.props.authors[this.props.objPost.authorId].name,
   };
 
   handleSaveAuthor = () => {
-    const {saveAuthor, objPost, objComments, authors} = this.props;
+    const {saveAuthor, objPost, authors} = this.props;
     if (this.state.editingAuthor) {
       this.setState({
         authorName: authors[objPost.authorId].name
       });
+
       const editAuthor = {
         id: authors[objPost.authorId].id,
         name: this.state.authorName
       };
-      saveAuthor(editAuthor);
-      updateAuthor(editAuthor);
 
+      saveAuthor(editAuthor);
+      //updateAuthor(editAuthor);
     }
     this.setState({
       editingAuthor: !this.state.editingAuthor,
@@ -49,9 +49,6 @@ class Post extends Component {
             type="text"
             value={this.state.authorName}
             onChange={this.handleEditName}
-            ref={(input) => {
-              this.input = input
-            }}
           />
           <button onClick={this.handleSaveAuthor}>Save</button>
         </h6>
